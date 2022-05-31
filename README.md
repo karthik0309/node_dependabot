@@ -42,7 +42,9 @@
     <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    <a href="https://drive.google.com/file/d/1q75ZZx51xK2J3fKTyrKaL9yvPjBAT0ZI/view?usp=sharing">
+      View Demo
+    </a>
     ·
     <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
     ·
@@ -83,7 +85,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]]
 
 Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
 
@@ -93,14 +95,10 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 ### Built With
 
-* [Next.js](https://nextjs.org/)
-* [React.js](https://reactjs.org/)
-* [Vue.js](https://vuejs.org/)
-* [Angular](https://angular.io/)
-* [Svelte](https://svelte.dev/)
-* [Laravel](https://laravel.com)
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
+* [Node js]("https://nodejs.org/")
+* [Yargs]("http://yargs.js.org/")
+* [Octokit]("https://octokit.github.io/rest.js/v18)
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -119,21 +117,46 @@ This is an example of how to list things you need to use the software and how to
   ```sh
   npm install npm@latest -g
   ```
+* gh cli
+  ```sh
+    mac - brew install gh	
+    linux - winget install --id GitHub.cli	
+  ```
+For more info refer [here](https://github.com/cli/cli)
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/dyte-submissions/dyte-vit-2022-karthik0309
    ```
-3. Install NPM packages
+2. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
+3. Run npm i -g .
    ```js
-   const API_KEY = 'ENTER YOUR API';
+    npm i -g .
+   ```
+4. Go to the installed dir and give program executable permission to files
+   ```js
+    sudo chown -R $USER /usr/local/lib/node_modules
+   ```
+5. Create a .env file and add your gh private access token and git_url
+   ```js
+    GH_TOKEN="your_private_access_token"
+    GH_URL="your_github_url"
+   ```
+
+6. To run the program(only to check package version)
+   ```js
+    node_dependabot -i "filepath package@version"
+
+    eg: node_dependabot  -i "./repo.csv axios@0.23.0"
+   ```
+   - to lower version Update packages
+   ```js
+    node_dependabot -update -i "./repo.csv axios@0.23.0"
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -145,6 +168,18 @@ This is an example of how to list things you need to use the software and how to
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
+  To check if all repos of packages of spesified version:
+  ```js
+    node_dependabot  -i "./repo.csv axios@0.23.0"
+  ```
+  <img src="images/version.png" alt="Logo">
+
+  To update packages with lower version
+  ```js
+    node_dependabot -update -i "./repo.csv axios@0.23.0"
+  ```
+  <img src="images/update.png" alt="Logo">
+
 _For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -154,12 +189,11 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+- [ ] know outdated packages
+- [ ] update outdated packages
+- [ ] creating a pull request of updated packages
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/dyte-submissions/dyte-vit-2022-karthik0309/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -195,9 +229,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Karthik Belida - [@linkedin](https://www.linkedin.com/in/karthik-belida-5812a61b0/) - karthik392001@gmail.com
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+Project Link: [dyte-vit-2022-karthik0309](https://github.com/dyte-submissions/dyte-vit-2022-karthik0309)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -217,15 +251,18 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
-[contributors-url]: https://github.com/github_username/repo_name/graphs/contributors
+[contributors-url]: https://github.com/dyte-submissions/dyte-vit-2022-karthik0309/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
-[forks-url]: https://github.com/github_username/repo_name/network/members
+[forks-url]: https://github.com/dyte-submissions/dyte-vit-2022-karthik0309/network/members
 [stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
-[stars-url]: https://github.com/github_username/repo_name/stargazers
+[stars-url]: https://github.com/dyte-submissions/dyte-vit-2022-karthik0309/stargazers
 [issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
-[issues-url]: https://github.com/github_username/repo_name/issues
+[issues-url]: https://github.com/dyte-submissions/dyte-vit-2022-karthik0309/issues
 [license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
 [license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/screenshot.png
+[linkedin-url]: https://www.linkedin.com/in/karthik-belida-5812a61b0/
+[product-screenshot]: images/version.png
+[email]:karthik392001@gmail.com
+[github_username]:karthik0309
+ 

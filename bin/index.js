@@ -11,6 +11,7 @@ const options = yargs
  .option("update", { alias: "update", describe: "update packages", type: "string"}) 
  .argv;
 
+
 let inputRepos = []
 let repoDependencies=[]
 let lowerVersions=[]
@@ -78,10 +79,10 @@ const updatePackages=(csvFilePath,package,version)=>{
     convertCsvToJSON(csvFilePath,package,version,true)
 }
 
-if(options.filepath){
+if(options.u && options.filepath){
     updatePackages(filepath,package,version)
     
-}else if(options.update && options.filepath){
+}else if(options.filepath){
     checkPackageVersion(filepath,package,version)
 }
 
