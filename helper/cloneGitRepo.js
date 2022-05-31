@@ -1,5 +1,4 @@
 const util = require('util');
-const shell = require('./shell')
 const exec = util.promisify(require('child_process').exec);
 const gitPullRequest = require('./gitPullRequest')
 const gh = require('github-url-to-object');
@@ -15,6 +14,7 @@ const cloneGitRepo =async(gitRepo,package,version)=>{
 
     let {repo} = repository
 
+    const orgDir = process. cwd()
     const gitCloneDir = gitRepo.split("/");
     const simplifiedGitCloneDir = gitCloneDir[gitCloneDir.length-1]
 
@@ -28,11 +28,17 @@ const cloneGitRepo =async(gitRepo,package,version)=>{
     await exec(`git add .`)
     await exec(`git commit -m "updated package"`)
     await exec(`git remote set-url origin https://github.com/karthik0309/${repo}`)
-    await exec(`git push origin main`)
+    await exec(`git push origin main -f`)
 
-    // console.log(`updated ${package} package version to ${version}`)
+    console.log(`updated ${package} package version to ${version} in ${repo}`)
 
-    gitPullRequest(gitRepo,package,version)
+    const pull_url = gitPullRequest(gitRepo,package,version)
+
+    process.chdir('../')
+    await exec(`rm -r ${simplifiedGitCloneDir}`)
+    process.chdir(orgDir)
+
+    return pull_url
 }
 
 module.exports = cloneGitRepo

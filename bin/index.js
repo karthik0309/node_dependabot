@@ -13,9 +13,8 @@ const options = yargs
 
 let inputRepos = []
 let repoDependencies=[]
-let lowerVersions=[
-    
-]
+let lowerVersions=[]
+let updatedDepenencies=[]
 
 const simplefiedInput = options.filepath.split(" ")
 
@@ -24,7 +23,7 @@ const simplifiedPackage = simplefiedInput[1].split("@")
 const filepath = simplefiedInput[0]
 const package = simplifiedPackage[0]
 const version = simplifiedPackage[1]
-
+let updated = false
 
 const convertCsvToJSON=async(csvFilePath,package,version,update=false)=>{
     const jsonArray=await csv().fromFile(csvFilePath);
@@ -37,20 +36,40 @@ const convertCsvToJSON=async(csvFilePath,package,version,update=false)=>{
         const versionSatisfied = versionDiff>=0 ? true : false
        
         let obj={repo: item.repo, package:package,version:currVersion,version_satisfied:versionSatisfied}
+        let updatedObj = {...obj,updated_pr:""}
+        updatedDepenencies.push(updatedObj)
+
         !versionSatisfied && lowerVersions.push(obj)
         return obj
     }))
     
-    // console.log(lowerVersions)
     if(update && lowerVersions && lowerVersions.length>0){
-        cloneGitRepo(lowerVersions[0].repo,lowerVersions[0].package,version)
+
+        await Promise.all(lowerVersions.map(async(item)=>{
+           const pull_url = await cloneGitRepo(item.repo,item.package,version) 
+
+           updatedDepenencies.filter((dep)=>{
+               if(dep.repo==item.repo){
+                   dep.updated_pr=pull_url
+               }
+               update=true
+           })
+
+            printTable(updatedDepenencies)
+        }))
     }
-    // console.log("\n")
-    // console.table(repoDependencies)
-    // console.log("\n")
+
+    if(!update){
+        printTable(repoDependencies)
+    }
 
 }
 
+const printTable=(obj)=>{
+    console.log("\n")
+    console.table(obj)
+    console.log("\n")
+}
 const checkPackageVersion=(csvFilePath,package,version)=>{
     convertCsvToJSON(csvFilePath,package,version)
 }
