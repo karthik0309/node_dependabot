@@ -1,5 +1,6 @@
+require('dotenv').config()
 const gh = require('github-url-to-object');
-const { Octokit, App } = require("octokit")
+const { Octokit } = require("octokit")
 
 const gitPullRequest=async(gitRepo,package,version)=>{
     let repository = gh(gitRepo)
@@ -12,7 +13,7 @@ const gitPullRequest=async(gitRepo,package,version)=>{
 
 
     const octokit = new Octokit({
-        auth: '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'
+        auth: process.env.GH_TOKEN
       })
       
     const res=await octokit.request(`POST /repos/${user}/${repo}/pulls`, {
@@ -20,12 +21,10 @@ const gitPullRequest=async(gitRepo,package,version)=>{
         repo: repo,
         title: `updated ${package}`,
         body: `updated ${package} package version to ${version}`,
-        head: 'karthik0309:main',
+        head: `${process.env.GH_USER}:main`,
         base: 'main'
       })
      
-    // console.log(res)
-
     return res.data.html_url
 }
 

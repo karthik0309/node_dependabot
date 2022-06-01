@@ -1,3 +1,4 @@
+require('dotenv').config()
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const gitPullRequest = require('./gitPullRequest')
@@ -27,7 +28,7 @@ const cloneGitRepo =async(gitRepo,package,version)=>{
     await exec(`git init`)
     await exec(`git add .`)
     await exec(`git commit -m "updated package"`)
-    await exec(`git remote set-url origin https://github.com/karthik0309/${repo}`)
+    await exec(`git remote set-url origin ${process.env.GH_URL}/${repo}`)
     await exec(`git push origin main -f`)
 
     console.log(`updated ${package} package version to ${version} in ${repo}`)

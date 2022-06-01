@@ -146,6 +146,7 @@ For more info refer [here](https://github.com/cli/cli)
    ```js
     GH_TOKEN="your_private_access_token"
     GH_URL="your_github_url"
+    GH_USER="your_github_user-name"
    ```
 
 6. To run the program(only to check package version)
